@@ -142,9 +142,7 @@ create table `ebook_snapshot` (
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="74349544-9a6e-4e75-b9a8-678ba7354acf" object-ref="consoles/Connection_wiki" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="74349544-9a6e-4e75-b9a8-678ba7354acf" />
