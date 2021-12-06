@@ -16,7 +16,7 @@
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
-            <a-button type="primary">
+            <a-button type="primary" @click="edit(record)">
               編輯
             </a-button>
             <a-button type="danger">
@@ -27,6 +27,30 @@
       </a-table>
     </a-layout-content>
   </a-layout>
+  <a-modal
+      title="電子書表單"
+      v-model:visible="modalVisible"
+      :confirm-loading="modalLoading"
+      @ok="handleModalOk"
+  >
+    <a-form :model="ebook" :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
+      <a-form-item label="封面">
+        <a-input v-model:value="ebook.cover" />
+      </a-form-item>
+      <a-form-item label="名稱">
+        <a-input v-model:value="ebook.name" />
+      </a-form-item>
+      <a-form-item label="分類一">
+        <a-input v-model:value="ebook.category1Id" />
+      </a-form-item>
+      <a-form-item label="分類二">
+        <a-input v-model:value="ebook.category2Id" />
+      </a-form-item>
+      <a-form-item label="描述">
+        <a-input v-model:value="ebook.desc" type="textarea" />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 
 <script lang="ts">
@@ -85,13 +109,19 @@ export default defineComponent({
 
     const handleQuery = (params: any) => {
       loading.value = true;
-      axios.get("/ebook/list", params).then((response) => {
+      axios.get("/ebook/list", {
+        params: {
+          page: params.page,
+          size: params.size
+        }
+      }).then((response) => {
         loading.value = false;
         const data = response.data;
-        ebooks.value = data.content;
+        ebooks.value = data.content.list;
 
         // 重置分頁按鈕
         pagination.value.current = params.page;
+        pagination.value.total = data.content.total;
       });
     };
 
@@ -104,6 +134,37 @@ export default defineComponent({
       });
     };
 
+    // -------- 表單 ---------
+    const ebook = ref({});
+    const modalVisible = ref(false);
+    const modalLoading = ref(false);
+    const handleModalOk = () => {
+      modalLoading.value = true;
+
+
+      axios.post("/ebook/save", ebook.value
+      ).then((response) => {
+        const data = response.data; //dadta = commonResp
+        if (data.success){
+          modalVisible.value = false;
+          modalLoading.value = false;
+
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize
+          });
+        }
+      });
+    };
+
+    /**
+     * 編輯
+     */
+    const edit = (record:any) => {
+      modalVisible.value = true;
+      ebook.value =record;
+    };
+
     onMounted(() => {
       handleQuery({});
     });
@@ -113,7 +174,12 @@ export default defineComponent({
       pagination,
       columns,
       loading,
-      handleTableChange
+      handleTableChange,
+      edit,
+      ebook,
+      modalVisible,
+      modalLoading,
+      handleModalOk
     }
   }
 });
