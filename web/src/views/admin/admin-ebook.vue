@@ -3,6 +3,24 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
+      <p>
+        <a-form layout="inline" :model="param">
+          <a-form-item>
+            <a-input v-model:value="param.name" placeholder="名稱">
+            </a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-button type="primary" @click="handleQuery({page: 1, size: pagination.pageSize})">
+              查詢
+            </a-button>
+          </a-form-item>
+          <a-form-item>
+            <a-button type="primary" @click="add()">
+              新增
+            </a-button>
+          </a-form-item>
+        </a-form>
+      </p>
       <a-table
           :columns="columns"
           :row-key="record => record.id"
@@ -19,9 +37,16 @@
             <a-button type="primary" @click="edit(record)">
               編輯
             </a-button>
-            <a-button type="danger">
-              刪除
-            </a-button>
+            <a-popconfirm
+                title="刪除後不可恢復,確認是否要刪除?"
+                ok-text="是"
+                cancel-text="否"
+                @confirm="handleDelete(record.id)"
+            >
+              <a-button type="danger">
+                刪除
+              </a-button>
+            </a-popconfirm>
           </a-space>
         </template>
       </a-table>
@@ -47,7 +72,7 @@
         <a-input v-model:value="ebook.category2Id" />
       </a-form-item>
       <a-form-item label="描述">
-        <a-input v-model:value="ebook.desc" type="textarea" />
+        <a-input v-model:value="ebook.description" type="textarea" />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -56,10 +81,14 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import axios from 'axios';
+import { message } from 'ant-design-vue';
+import {Tool} from "@/util/tool";
 
 export default defineComponent({
   name: 'AdminEbook',
   setup() {
+    const param = ref();
+    param.value = {};
     const ebooks = ref();
     const pagination = ref({
       current: 1,
@@ -112,16 +141,19 @@ export default defineComponent({
       axios.get("/ebook/list", {
         params: {
           page: params.page,
-          size: params.size
+          size: params.size,
+          name: param.value.name
         }
       }).then((response) => {
         loading.value = false;
         const data = response.data;
-        ebooks.value = data.content.list;
-
-        // 重置分頁按鈕
-        pagination.value.current = params.page;
-        pagination.value.total = data.content.total;
+        if (data.success) {
+          ebooks.value = data.content.list;
+          pagination.value.current = params.page;
+          pagination.value.total = data.content.total;
+        } else {
+          message.error(data.message);
+        }
       });
     };
 
@@ -144,15 +176,17 @@ export default defineComponent({
 
       axios.post("/ebook/save", ebook.value
       ).then((response) => {
+        modalLoading.value = false;
         const data = response.data; //dadta = commonResp
         if (data.success){
           modalVisible.value = false;
-          modalLoading.value = false;
 
           handleQuery({
             page: pagination.value.current,
             size: pagination.value.pageSize
           });
+        } else {
+          message.error(data.message);
         }
       });
     };
@@ -162,24 +196,48 @@ export default defineComponent({
      */
     const edit = (record:any) => {
       modalVisible.value = true;
-      ebook.value =record;
+      ebook.value = Tool.copy(record);
     };
+
+    /**
+     * 新增
+     */
+    const add = () => {
+      modalVisible.value = true;
+      ebook.value = {};
+    };
+    const handleDelete = (id: number) => {
+      axios.delete("/ebook/delete/" + id).then((response) => {
+        const data = response.data; // data = commonResp
+        if (data.success) {
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize,
+          });
+        }
+      });
+    };
+
 
     onMounted(() => {
       handleQuery({});
     });
 
     return {
+      param,
       ebooks,
       pagination,
       columns,
       loading,
       handleTableChange,
       edit,
+      add,
       ebook,
       modalVisible,
       modalLoading,
-      handleModalOk
+      handleModalOk,
+      handleDelete,
+      handleQuery
     }
   }
 });
