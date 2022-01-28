@@ -46,20 +46,20 @@ public class UserService {
         List<User> userList = userMapper.selectByExample(userExample);
 
         PageInfo<User> pageInfo = new PageInfo<>(userList);
-        LOG.info("总行数：{}", pageInfo.getTotal());
-        LOG.info("总页数：{}", pageInfo.getPages());
+        LOG.info("總行數：{}", pageInfo.getTotal());
+        LOG.info("總頁數：{}", pageInfo.getPages());
 
         // List<UserResp> respList = new ArrayList<>();
         // for (User user : userList) {
         //     // UserResp userResp = new UserResp();
         //     // BeanUtils.copyProperties(user, userResp);
-        //     // 对象复制
+        //
         //     UserResp userResp = CopyUtil.copy(user, UserResp.class);
         //
         //     respList.add(userResp);
         // }
 
-        // 列表复制
+
         List<UserQueryResp> list = CopyUtil.copyList(userList, UserQueryResp.class);
 
         PageResp<UserQueryResp> pageResp = new PageResp();
@@ -109,7 +109,7 @@ public class UserService {
     }
 
     /**
-     * 修改密码
+     * 修改密碼
      */
     public void resetPassword(UserResetPasswordReq req) {
         User user = CopyUtil.copy(req, User.class);
@@ -117,22 +117,19 @@ public class UserService {
     }
 
     /**
-     * 登录
+     * 登入
      */
     public UserLoginResp login(UserLoginReq req) {
         User userDb = selectByLoginName(req.getLoginName());
         if (ObjectUtils.isEmpty(userDb)) {
-            // 用户名不存在
             LOG.info("用户名不存在, {}", req.getLoginName());
             throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
         } else {
             if (userDb.getPassword().equals(req.getPassword())) {
-                // 登录成功
                 UserLoginResp userLoginResp = CopyUtil.copy(userDb, UserLoginResp.class);
                 return userLoginResp;
             } else {
-                // 密码不对
-                LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", req.getPassword(), userDb.getPassword());
+                LOG.info("密碼錯誤, 輸入密碼：{}, 資料庫密碼：{}", req.getPassword(), userDb.getPassword());
                 throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
             }
         }

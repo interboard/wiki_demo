@@ -2,9 +2,9 @@ package com.jiawa.wiki.exception;
 
 public enum BusinessExceptionCode {
 
-    USER_LOGIN_NAME_EXIST("登录名已存在"),
-    LOGIN_USER_ERROR("用户名不存在或密码错误"),
-    VOTE_REPEAT("您已点赞过"),
+    USER_LOGIN_NAME_EXIST("登入名已存在"),
+    LOGIN_USER_ERROR("帳號或密碼錯誤"),
+    VOTE_REPEAT("已點讚過"),
     ;
 
     private String desc;

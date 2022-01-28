@@ -16,29 +16,29 @@ public class WebSocketServer {
     private static final Logger LOG = LoggerFactory.getLogger(WebSocketServer.class);
 
     /**
-     * 每个客户端一个token
+     * 每個客戶端一個token
      */
     private String token = "";
 
     private static HashMap<String, Session> map = new HashMap<>();
 
     /**
-     * 连接成功
+     * 連接成功
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("token") String token) {
         map.put(token, session);
         this.token = token;
-        LOG.info("有新连接：token：{}，session id：{}，当前连接数：{}", token, session.getId(), map.size());
+        LOG.info("有新連接：token：{}，session id：{}，當前連接數：{}", token, session.getId(), map.size());
     }
 
     /**
-     * 连接关闭
+     * 連接關閉
      */
     @OnClose
     public void onClose(Session session) {
         map.remove(this.token);
-        LOG.info("连接关闭，token：{}，session id：{}！当前连接数：{}", this.token, session.getId(), map.size());
+        LOG.info("連接關閉，token：{}，session id：{}！當前連接數：{}", this.token, session.getId(), map.size());
     }
 
     /**
@@ -50,15 +50,15 @@ public class WebSocketServer {
     }
 
     /**
-     * 连接错误
+     * 連接錯誤
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        LOG.error("发生错误", error);
+        LOG.error("發生錯誤", error);
     }
 
     /**
-     * 群发消息
+     * 群發消息
      */
     public void sendInfo(String message) {
         for (String token : map.keySet()) {
@@ -66,7 +66,7 @@ public class WebSocketServer {
             try {
                 session.getBasicRemote().sendText(message);
             } catch (IOException e) {
-                LOG.error("推送消息失败：{}，内容：{}", token, message);
+                LOG.error("推送消息失敗：{}，内容：{}", token, message);
             }
             LOG.info("推送消息：{}，内容：{}", token, message);
         }

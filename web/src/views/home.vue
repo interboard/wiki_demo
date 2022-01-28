@@ -2,14 +2,14 @@
   <a-layout>
     <a-layout-sider width="200" style="background: #fff">
       <a-menu
-        mode="inline"
-        :style="{ height: '100%', borderRight: 0 }"
-        @click="handleClick"
-        :openKeys="openKeys"
+          mode="inline"
+          :style="{ height: '100%', borderRight: 0 }"
+          @click="handleClick"
+          :openKeys="openKeys"
       >
         <a-menu-item key="welcome">
           <MailOutlined />
-          <span>欢迎</span>
+          <span>歡迎</span>
         </a-menu-item>
         <a-sub-menu v-for="item in level1" :key="item.id" :disabled="true">
           <template v-slot:title>
@@ -20,13 +20,13 @@
           </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="tip" :disabled="true">
-          <span>以上菜单在分类管理配置</span>
+          <span>以上選單在分類管理配置</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout-content
-    :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
-  >
+        :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
+    >
       <div class="welcome" v-show="isShowWelcome">
         <the-welcome></the-welcome>
       </div>
@@ -58,7 +58,7 @@
           </a-list-item>
         </template>
       </a-list>
-  </a-layout-content>
+    </a-layout-content>
   </a-layout>
 </template>
 
@@ -96,16 +96,16 @@ export default defineComponent({
     const level1 =  ref();
     let categorys: any;
     /**
-     * 查询所有分类
+     * 查詢所有分類
      **/
     const handleQueryCategory = () => {
       axios.get("/category/all").then((response) => {
         const data = response.data;
         if (data.success) {
           categorys = data.content;
-          console.log("原始数组：", categorys);
+          console.log("原始數組：", categorys);
 
-          // 加载完分类后，将侧边栏全部展开
+          // 加載完分類後，將側邊欄全部展開
           openKeys.value = [];
           for (let i = 0; i < categorys.length; i++) {
             openKeys.value.push(categorys[i].id)
@@ -113,7 +113,7 @@ export default defineComponent({
 
           level1.value = [];
           level1.value = Tool.array2Tree(categorys, 0);
-          console.log("树形结构：", level1.value);
+          console.log("樹形結構：", level1.value);
         } else {
           message.error(data.message);
         }
@@ -182,11 +182,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  .ant-avatar {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 8%;
-    margin: 5px 0;
-  }
+.ant-avatar {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 8%;
+  margin: 5px 0;
+}
 </style>

@@ -22,16 +22,16 @@ public class DocJob {
     private SnowFlake snowFlake;
 
     /**
-     * 每30秒更新电子书信息
+     * 每30秒更新數據
      */
     @Scheduled(cron = "5/30 * * * * ?")
     public void cron() {
-        // 增加日志流水号
+
         MDC.put("LOG_ID", String.valueOf(snowFlake.nextId()));
-        LOG.info("更新电子书下的文档数据开始");
+        LOG.info("每30秒更新數據start");
         long start = System.currentTimeMillis();
         docService.updateEbookInfo();
-        LOG.info("更新电子书下的文档数据结束，耗时：{}毫秒", System.currentTimeMillis() - start);
+        LOG.info("每30秒更新數據end，耗时：{}毫秒", System.currentTimeMillis() - start);
     }
 
 }

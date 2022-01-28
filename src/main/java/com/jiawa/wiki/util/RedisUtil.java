@@ -28,7 +28,7 @@ public class RedisUtil {
             LOG.info("key已存在：{}", key);
             return false;
         } else {
-            LOG.info("key不存在，放入：{}，过期 {} 秒", key, second);
+            LOG.info("key不存在，放入：{}，過期 {} 秒", key, second);
             redisTemplate.opsForValue().set(key, key, second, TimeUnit.SECONDS);
             return true;
         }

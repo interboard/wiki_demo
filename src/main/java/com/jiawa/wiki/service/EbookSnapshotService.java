@@ -15,17 +15,19 @@ public class EbookSnapshotService {
 
     public void genSnapshot() {
         ebookSnapshotMapperCust.genSnapshot();
+        ebookSnapshotMapperCust.updateSnapshot1();
+        ebookSnapshotMapperCust.updateSnapshot2();
     }
 
     /**
-     * 获取首页数值数据：总阅读数、总点赞数、今日阅读数、今日点赞数、今日预计阅读数、今日预计阅读增长
+     * 獲取各項數據
      */
     public List<StatisticResp> getStatistic() {
         return ebookSnapshotMapperCust.getStatistic();
     }
 
     /**
-     * 30天数值统计
+     * 30天數值統計
      */
     public List<StatisticResp> get30Statistic() {
         return ebookSnapshotMapperCust.get30Statistic();

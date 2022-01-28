@@ -21,18 +21,15 @@ public class EbookSnapshotJob {
     @Resource
     private SnowFlake snowFlake;
 
-    /**
-     * 自定义cron表达式跑批
-     * 只有等上一次执行完成，下一次才会在下一个时间点执行，错过就错过
-     */
+
     @Scheduled(cron = "0 0/1 * * * ?")
     public void doSnapshot() {
-        // 增加日志流水号
+
         MDC.put("LOG_ID", String.valueOf(snowFlake.nextId()));
-        LOG.info("生成今日电子书快照开始");
+        LOG.info("今日檔案快照");
         Long start = System.currentTimeMillis();
         ebookSnapshotService.genSnapshot();
-        LOG.info("生成今日电子书快照结束，耗时：{}毫秒", System.currentTimeMillis() - start);
+        LOG.info("今日檔案快照结束，耗时：{}毫秒", System.currentTimeMillis() - start);
     }
 
 }

@@ -13,6 +13,10 @@ public class EbookSnapshot {
 
     private Integer voteCount;
 
+    private Integer viewIncrease;
+
+    private Integer voteIncrease;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +57,22 @@ public class EbookSnapshot {
         this.voteCount = voteCount;
     }
 
+    public Integer getViewIncrease() {
+        return viewIncrease;
+    }
+
+    public void setViewIncrease(Integer viewIncrease) {
+        this.viewIncrease = viewIncrease;
+    }
+
+    public Integer getVoteIncrease() {
+        return voteIncrease;
+    }
+
+    public void setVoteIncrease(Integer voteIncrease) {
+        this.voteIncrease = voteIncrease;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -64,6 +84,8 @@ public class EbookSnapshot {
         sb.append(", date=").append(date);
         sb.append(", viewCount=").append(viewCount);
         sb.append(", voteCount=").append(voteCount);
+        sb.append(", viewIncrease=").append(viewIncrease);
+        sb.append(", voteIncrease=").append(voteIncrease);
         sb.append("]");
         return sb.toString();
     }

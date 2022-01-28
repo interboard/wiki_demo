@@ -431,6 +431,126 @@ public class EbookSnapshotExample {
             addCriterion("vote_count not between", value1, value2, "voteCount");
             return (Criteria) this;
         }
+
+        public Criteria andViewIncreaseIsNull() {
+            addCriterion("view_increase is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseIsNotNull() {
+            addCriterion("view_increase is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseEqualTo(Integer value) {
+            addCriterion("view_increase =", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseNotEqualTo(Integer value) {
+            addCriterion("view_increase <>", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseGreaterThan(Integer value) {
+            addCriterion("view_increase >", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseGreaterThanOrEqualTo(Integer value) {
+            addCriterion("view_increase >=", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseLessThan(Integer value) {
+            addCriterion("view_increase <", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseLessThanOrEqualTo(Integer value) {
+            addCriterion("view_increase <=", value, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseIn(List<Integer> values) {
+            addCriterion("view_increase in", values, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseNotIn(List<Integer> values) {
+            addCriterion("view_increase not in", values, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseBetween(Integer value1, Integer value2) {
+            addCriterion("view_increase between", value1, value2, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewIncreaseNotBetween(Integer value1, Integer value2) {
+            addCriterion("view_increase not between", value1, value2, "viewIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseIsNull() {
+            addCriterion("vote_increase is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseIsNotNull() {
+            addCriterion("vote_increase is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseEqualTo(Integer value) {
+            addCriterion("vote_increase =", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseNotEqualTo(Integer value) {
+            addCriterion("vote_increase <>", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseGreaterThan(Integer value) {
+            addCriterion("vote_increase >", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseGreaterThanOrEqualTo(Integer value) {
+            addCriterion("vote_increase >=", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseLessThan(Integer value) {
+            addCriterion("vote_increase <", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseLessThanOrEqualTo(Integer value) {
+            addCriterion("vote_increase <=", value, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseIn(List<Integer> values) {
+            addCriterion("vote_increase in", values, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseNotIn(List<Integer> values) {
+            addCriterion("vote_increase not in", values, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseBetween(Integer value1, Integer value2) {
+            addCriterion("vote_increase between", value1, value2, "voteIncrease");
+            return (Criteria) this;
+        }
+
+        public Criteria andVoteIncreaseNotBetween(Integer value1, Integer value2) {
+            addCriterion("vote_increase not between", value1, value2, "voteIncrease");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

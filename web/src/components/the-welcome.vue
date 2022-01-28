@@ -74,7 +74,7 @@
             </a-col>
             <a-col :span="12">
               <a-statistic
-                title="预计今日阅读增长"
+                title="預計今日閱讀增長"
                 :value="statistic.todayViewIncreaseRateAbs"
                 :precision="2"
                 suffix="%"
@@ -121,12 +121,12 @@
             statistic.value.todayViewCount = statisticResp[1].viewIncrease;
             statistic.value.todayVoteCount = statisticResp[1].voteIncrease;
 
-            // 按分钟计算当前时间点，占一天的百分比
+            // 按分鐘計算當前時間點，占一天的百分比
             const now = new Date();
             const nowRate = (now.getHours() * 60 + now.getMinutes()) / (60 * 24);
             // console.log(nowRate)
             statistic.value.todayViewIncrease = parseInt(String(statisticResp[1].viewIncrease / nowRate));
-            // todayViewIncreaseRate：今日预计增长率
+            // todayViewIncreaseRate：今日預計增長率
             statistic.value.todayViewIncreaseRate = (statistic.value.todayViewIncrease - statisticResp[0].viewIncrease) / statisticResp[0].viewIncrease * 100;
             statistic.value.todayViewIncreaseRateAbs = Math.abs(statistic.value.todayViewIncreaseRate);
           }
@@ -134,13 +134,13 @@
       };
 
       const init30DayEcharts = (list: any) => {
-        // 发布生产后出现问题：切到别的页面，再切回首页，报表显示不出来
-        // 解决方法：把原来的id=main的区域清空，重新初始化
+        // 切到别的頁面，再切回首頁，報表顯示不出來
+        // 解決方法：把原来的id=main的區域清空，重新初始化
         const mainDom = document.getElementById('main-col');
         if (mainDom) {
           mainDom.innerHTML = '<div id="main" style="width: 100%;height:300px;"></div>';
         }
-        // 基于准备好的dom，初始化echarts实例
+        // 基於準備好的dom，初始化echarts實例
         const myChart = echarts.init(document.getElementById('main'));
 
         const xAxis = [];
@@ -153,16 +153,16 @@
           seriesVote.push(record.voteIncrease);
         }
 
-        // 指定图表的配置项和数据
+        // 圖表的配置和數據
         const option = {
           title: {
-            text: '30天趋势图'
+            text: '30天趨勢圖'
           },
           tooltip: {
             trigger: 'axis'
           },
           legend: {
-            data: ['总阅读量', '总点赞量']
+            data: ['總閱讀量', '總點讚量']
           },
           grid: {
             left: '1%',
@@ -185,23 +185,21 @@
           },
           series: [
             {
-              name: '总阅读量',
+              name: '總閱讀量',
               type: 'line',
-              // stack: '总量', 不堆叠
               data: seriesView,
               smooth: true
             },
             {
-              name: '总点赞量',
+              name: '總點讚量',
               type: 'line',
-              // stack: '总量', 不堆叠
               data: seriesVote,
               smooth: true
             }
           ]
         };
 
-        // 使用刚指定的配置项和数据显示图表。
+        // 使用剛指定的數據跟配置顯示圖表。
         myChart.setOption(option);
       };
 
@@ -217,24 +215,24 @@
       };
 
       const testEcharts = () => {
-        // 基于准备好的dom，初始化echarts实例
+
         const myChart = echarts.init(document.getElementById('main'));
 
-        // 指定图表的配置项和数据
+
         const option = {
           title: {
-            text: 'ECharts 入门示例'
+            text: 'ECharts'
           },
           tooltip: {},
           legend: {
-            data:['销量']
+            data:['銷量']
           },
           xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            data: ["褲子","鞋"]
           },
           yAxis: {},
           series: [{
-            name: '销量',
+            name: '銷量',
             type: 'bar',
             data: [5, 20, 36, 10, 10, 20]
           }]

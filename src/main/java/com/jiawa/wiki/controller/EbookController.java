@@ -49,13 +49,12 @@ public class EbookController {
 
     @RequestMapping("/upload/avatar")
     public CommonResp upload(@RequestParam MultipartFile avatar) throws IOException {
-        LOG.info("上传文件开始：{}", avatar);
-        LOG.info("文件名：{}", avatar.getOriginalFilename());
+        LOG.info("開始上傳文件：{}", avatar);
+        LOG.info("文件名稱：{}", avatar.getOriginalFilename());
         LOG.info("文件大小：{}", avatar.getSize());
 
-        // 保存文件到本地
         String fileName = avatar.getOriginalFilename();
-        String fullPath = "D:/file/wiki/" + fileName;
+        String fullPath = "/" + fileName;
         File dest = new File(fullPath);
         avatar.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
