@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jiawa.wiki.mapper.TestMapper" >
+<mapper namespace="com.interboard.wikiblog.mapper.TestMapper" >
 
-    <select id="list" resultType="com.jiawa.wiki.domain.Test">
+    <select id="list" resultType="com.interboard.wikiblog.domain.Test">
         select `id`, `name`, `password` from `test`
     </select>
 

@@ -20,7 +20,7 @@
           </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="tip" :disabled="true">
-          <span>以上選單在分類管理配置</span>
+
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

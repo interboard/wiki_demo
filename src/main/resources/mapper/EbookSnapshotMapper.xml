@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jiawa.wiki.mapper.EbookSnapshotMapper">
-  <resultMap id="BaseResultMap" type="com.jiawa.wiki.domain.EbookSnapshot">
+<mapper namespace="com.interboard.wikiblog.mapper.EbookSnapshotMapper">
+  <resultMap id="BaseResultMap" type="com.interboard.wikiblog.domain.EbookSnapshot">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="ebook_id" jdbcType="BIGINT" property="ebookId" />
     <result column="date" jdbcType="DATE" property="date" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, ebook_id, `date`, view_count, vote_count, view_increase, vote_increase
   </sql>
-  <select id="selectByExample" parameterType="com.jiawa.wiki.domain.EbookSnapshotExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.interboard.wikiblog.domain.EbookSnapshotExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,13 +95,13 @@
     delete from ebook_snapshot
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jiawa.wiki.domain.EbookSnapshotExample">
+  <delete id="deleteByExample" parameterType="com.interboard.wikiblog.domain.EbookSnapshotExample">
     delete from ebook_snapshot
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jiawa.wiki.domain.EbookSnapshot">
+  <insert id="insert" parameterType="com.interboard.wikiblog.domain.EbookSnapshot">
     insert into ebook_snapshot (id, ebook_id, `date`, 
       view_count, vote_count, view_increase, 
       vote_increase)
@@ -109,7 +109,7 @@
       #{viewCount,jdbcType=INTEGER}, #{voteCount,jdbcType=INTEGER}, #{viewIncrease,jdbcType=INTEGER}, 
       #{voteIncrease,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.jiawa.wiki.domain.EbookSnapshot">
+  <insert id="insertSelective" parameterType="com.interboard.wikiblog.domain.EbookSnapshot">
     insert into ebook_snapshot
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jiawa.wiki.domain.EbookSnapshotExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.interboard.wikiblog.domain.EbookSnapshotExample" resultType="java.lang.Long">
     select count(*) from ebook_snapshot
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jiawa.wiki.domain.EbookSnapshot">
+  <update id="updateByPrimaryKeySelective" parameterType="com.interboard.wikiblog.domain.EbookSnapshot">
     update ebook_snapshot
     <set>
       <if test="ebookId != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jiawa.wiki.domain.EbookSnapshot">
+  <update id="updateByPrimaryKey" parameterType="com.interboard.wikiblog.domain.EbookSnapshot">
     update ebook_snapshot
     set ebook_id = #{ebookId,jdbcType=BIGINT},
       `date` = #{date,jdbcType=DATE},
